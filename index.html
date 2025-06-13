@@ -1,86 +1,60 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Financial Tech Dashboard – acompanhe cotações, notícias e simule investimentos." />
-  <title>Financial Tech Dashboard</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <!-- CSS principal (ou remova se usar a versão inline) -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Chart.js v4 -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
-  <!-- JS principal (ou remova se usar a versão inline) -->
-  <script src="script.js" type="module" defer></script>
+  <meta charset="utf-8" />
+  <title>Financial Tech Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
+
 <body>
-  <!-- ========== Header ========== -->
-  <header class="topbar" role="banner">
-    <div class="brand">
-      <img src="./assets/logo.svg" alt="Logo Financial Tech Dashboard" height="48" />
-      <h1>Financial Tech <span>Dashboard</span></h1>
-    </div>
-    <button id="themeToggle" class="icon-btn" aria-label="Alternar modo claro/escuro">
-      🌙
-    </button>
+  <header>
+    <h1>Financial Tech Dashboard</h1>
   </header>
 
-  <!-- ========== Conteúdo principal ========== -->
-  <main id="conteudo" class="grid" aria-live="polite">
-    <!-- Card Cotações -->
-    <section id="quotes" class="card" aria-labelledby="quotesTitle">
-      <h2 id="quotesTitle">Cotações em Tempo Real</h2>
-      <ul id="quotesList" class="quotes"></ul>
-      <p id="quotesError" class="error" hidden>Não foi possível carregar as cotações 😔</p>
-    </section>
+  <!-- TradingView Ticker Tape -->
+  <section id="ticker">
+    <!-- BEGIN TradingView Widget -->
+    <div class="tradingview-widget-container">
+      <script async src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+      {
+        "symbols": [
+          { "proName": "OANDA:SPX500USD", "title": "S&P 500" },
+          { "proName": "CURRENCYCOM:US100", "title": "Nasdaq 100" },
+          { "proName": "FX_IDC:USDBRL", "title": "USD/BRL" },
+          { "proName": "CRYPTO:BTCUSD", "title": "Bitcoin" }
+        ],
+        "showSymbolLogo": true,
+        "isTransparent": false,
+        "colorTheme": "light",
+        "displayMode": "adaptive",
+        "locale": "br"
+      }
+      </script>
+    </div>
+    <!-- END TradingView Widget -->
+  </section>
 
-    <!-- Card Gráfico -->
-    <section id="chartCard" class="card" aria-labelledby="chartTitle">
-      <h2 id="chartTitle">Variação de Ativos (6 M)</h2>
-      <canvas id="priceChart" aria-label="Gráfico de linha com a variação de preços dos ativos" role="img"></canvas>
-    </section>
+  <!-- Bloco USD/BRL ao vivo -->
+  <section id="fx">
+    <h2>Cotação do Dólar (USD → BRL)</h2>
+    <p class="price"><span id="usdbrl">‑‑‑</span></p>
+    <p class="updated">Atualizado: <span id="lastUpdate">‑‑‑</span></p>
+  </section>
 
-    <!-- Card Notícias -->
-    <section id="news" class="card" aria-labelledby="newsTitle">
-      <h2 id="newsTitle">Últimas Notícias</h2>
-      <ul id="newsList" class="news"></ul>
-      <p id="newsError" class="error" hidden>Sem notícias no momento 🤔</p>
-    </section>
+  <!-- Gráfico de previsão -->
+  <section id="forecast">
+    <h2>Previsão Ibovespa – 30 dias</h2>
+    <canvas id="forecastChart" height="120"></canvas>
+  </section>
 
-    <!-- Card Simulador -->
-    <section id="calculator" class="card" aria-labelledby="calcTitle">
-      <h2 id="calcTitle">Simulador de Poupança</h2>
-      <form id="calcForm">
-        <label>
-          Valor Mensal (R$)
-          <input id="valor" name="valor" type="number" min="0" step="0.01" required />
-        </label>
-        <label>
-          Juros Mensais (%)
-          <input id="taxa" name="taxa" type="number" min="0" step="0.01" required />
-        </label>
-        <label>
-          Meses
-          <input id="meses" name="meses" type="number" min="1" required />
-        </label>
-        <button class="primary" type="submit">Calcular</button>
-      </form>
-      <output id="valorFinal" aria-live="polite">—</output>
-    </section>
-  </main>
-
-  <!-- ========== Footer ========== -->
-  <footer class="footer" role="contentinfo">
-    <small>© 2025 Financial Tech Dashboard – desenvolvido por Juliana Araujo</small>
+  <footer>
+    <small>Dados em tempo real via TradingView &amp; exchangerate.host.  
+    Previsão gerada com Prophet · Atualizado diariamente pelo GitHub Actions.</small>
   </footer>
 
-  <!-- Skeleton loader (opcional se quiser inline) -->
-  <template id="quoteSkeleton">
-    <li class="skeleton">•••<span>—</span></li>
-  </template>
-
+  <script src="js/main.js"></script>
 </body>
 </html>
