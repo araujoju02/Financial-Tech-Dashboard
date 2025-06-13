@@ -1,67 +1,86 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Financial Tech Dashboard - Acompanhe o mercado financeiro">
-  <meta name="keywords" content="financeiro, bolsa, ativos, poupança">
-  <meta name="author" content="Juliana Araujo">
-  
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  
-  <title>Financial Tech Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Financial Tech Dashboard – acompanhe cotações, notícias e simule investimentos." />
+  <title>Financial Tech Dashboard</title>
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/chart.min.js" defer></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <!-- CSS principal (ou remova se usar a versão inline) -->
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- CSS externo -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js v4 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <!-- JS principal (ou remova se usar a versão inline) -->
+  <script src="script.js" type="module" defer></script>
 </head>
 <body>
-  <header>
-    <img src="./assets/logo.png" alt="Logo Dashboard">
-    <h1>Financial Tech Dashboard</h1>
+  <!-- ========== Header ========== -->
+  <header class="topbar" role="banner">
+    <div class="brand">
+      <img src="./assets/logo.svg" alt="Logo Financial Tech Dashboard" height="48" />
+      <h1>Financial Tech <span>Dashboard</span></h1>
+    </div>
+    <button id="themeToggle" class="icon-btn" aria-label="Alternar modo claro/escuro">
+      🌙
+    </button>
   </header>
 
-  <main>
-    <section id="quotes">
-      <h2>Cotações</h2>
-      <ul id="quotes-list">
-        <li>PETR4: <span id="petr4">Carregando...</span></li>
-        <li>VALE3: <span id="vale3">Carregando...</span></li>
-        <li>IBOVESPA: <span id="ibov">Carregando...</span></li>
-      </ul>
+  <!-- ========== Conteúdo principal ========== -->
+  <main id="conteudo" class="grid" aria-live="polite">
+    <!-- Card Cotações -->
+    <section id="quotes" class="card" aria-labelledby="quotesTitle">
+      <h2 id="quotesTitle">Cotações em Tempo Real</h2>
+      <ul id="quotesList" class="quotes"></ul>
+      <p id="quotesError" class="error" hidden>Não foi possível carregar as cotações 😔</p>
     </section>
 
-    <section id="chart">
-      <h2>Variação de Ativos</h2>
-      <canvas id="priceChart" aria-label="Grafico de ativos" role="img"></canvas>
+    <!-- Card Gráfico -->
+    <section id="chartCard" class="card" aria-labelledby="chartTitle">
+      <h2 id="chartTitle">Variação de Ativos (6 M)</h2>
+      <canvas id="priceChart" aria-label="Gráfico de linha com a variação de preços dos ativos" role="img"></canvas>
     </section>
 
-    <section id="news">
-      <h2>Notícias</h2>
-      <ul id="news-list">
-        <li>Carregando...</li>
-      </ul>
+    <!-- Card Notícias -->
+    <section id="news" class="card" aria-labelledby="newsTitle">
+      <h2 id="newsTitle">Últimas Notícias</h2>
+      <ul id="newsList" class="news"></ul>
+      <p id="newsError" class="error" hidden>Sem notícias no momento 🤔</p>
     </section>
 
-    <section id="calculator">
-      <h2>Simulador de Poupança</h2>
-      <label for="valor">Valor Mensal (R$):</label>
-      <input id="valor" type="number" min="0">
-      <label for="taxa">Juros Mensais (%):</label>
-      <input id="taxa" type="number" step="0.01">
-      <label for="meses">Quantidade de Meses:</label>
-      <input id="meses" type="number" min="0">
-      <button id="calcular">Calcular</button>
-      <p>Valor Final: <span id="valorFinal">-</span></p>
+    <!-- Card Simulador -->
+    <section id="calculator" class="card" aria-labelledby="calcTitle">
+      <h2 id="calcTitle">Simulador de Poupança</h2>
+      <form id="calcForm">
+        <label>
+          Valor Mensal (R$)
+          <input id="valor" name="valor" type="number" min="0" step="0.01" required />
+        </label>
+        <label>
+          Juros Mensais (%)
+          <input id="taxa" name="taxa" type="number" min="0" step="0.01" required />
+        </label>
+        <label>
+          Meses
+          <input id="meses" name="meses" type="number" min="1" required />
+        </label>
+        <button class="primary" type="submit">Calcular</button>
+      </form>
+      <output id="valorFinal" aria-live="polite">—</output>
     </section>
   </main>
 
-  <footer>
-    <p>Financial Tech Dashboard - desenvolvido por Juliana Araujo</p>
+  <!-- ========== Footer ========== -->
+  <footer class="footer" role="contentinfo">
+    <small>© 2025 Financial Tech Dashboard – desenvolvido por Juliana Araujo</small>
   </footer>
 
-  <!-- Script principal -->
-  <script src="script.js" defer></script>
+  <!-- Skeleton loader (opcional se quiser inline) -->
+  <template id="quoteSkeleton">
+    <li class="skeleton">•••<span>—</span></li>
+  </template>
+
 </body>
 </html>
