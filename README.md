@@ -20,15 +20,7 @@ Com ele, é possível:
 - [Alpha Vantage API](https://www.alphavantage.co/) para cotações
 - [Gnews API](https://gnews.io/) para noticias
 
-## Como usar
 
-1. Clone o repositório:
-
-2. Vá até o diretório: cd financial-tech-dashboard
-
-3. Edite o `script.js` para inserir suas chaves de API (se quiser).
-
-4. Publique pelo GitHub Pages nas configurações do repositório.
 
 ## Estrutura
 
