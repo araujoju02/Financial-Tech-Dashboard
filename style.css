@@ -3,7 +3,7 @@
   --bg-grad: linear-gradient(135deg,#fde9f4 0%,#e4e8ff 100%);
   --card: #ffffffee;
   --accent: #d063ad;
-  --accent‑down: #3a9d61;
+  --accent-down: #3a9d61;
   --txt: #3d3d3d;
   --radius: 1.25rem;
   --shadow: 0 4px 12px rgba(0,0,0,.08);
@@ -65,4 +65,3 @@ footer{
   h1{font-size:1.7rem}
   #fx .price{font-size:1.9rem}
 }
-
