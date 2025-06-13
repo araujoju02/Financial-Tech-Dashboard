@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Financial Tech Dashboard - Acompanhe o mercado financeiro">
+  <meta name="keywords" content="financeiro, bolsa, ativos, poupança">
+  <meta name="author" content="Juliana Araujo">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <title>Financial Tech Dashboard</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/chart.min.js" defer></script>
+
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="./assets/logo.png" alt="Logo Dashboard">
+    <h1>Financial Tech Dashboard</h1>
+  </header>
+
+  <main>
+    <section id="quotes">
+      <h2>Cotações</h2>
+      <ul id="quotes-list">
+        <li>PETR4: <span id="petr4">Carregando...</span></li>
+        <li>VALE3: <span id="vale3">Carregando...</span></li>
+        <li>IBOVESPA: <span id="ibov">Carregando...</span></li>
+      </ul>
+    </section>
+
+    <section id="chart">
+      <h2>Variação de Ativos</h2>
+      <canvas id="priceChart" aria-label="Grafico de ativos" role="img"></canvas>
+    </section>
+
+    <section id="news">
+      <h2>Notícias</h2>
+      <ul id="news-list">
+        <li>Carregando...</li>
+      </ul>
+    </section>
+
+    <section id="calculator">
+      <h2>Simulador de Poupança</h2>
+      <label for="valor">Valor Mensal (R$):</label>
+      <input id="valor" type="number" min="0">
+      <label for="taxa">Juros Mensais (%):</label>
+      <input id="taxa" type="number" step="0.01">
+      <label for="meses">Quantidade de Meses:</label>
+      <input id="meses" type="number" min="0">
+      <button id="calcular">Calcular</button>
+      <p>Valor Final: <span id="valorFinal">-</span></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Financial Tech Dashboard - desenvolvido por Juliana Araujo</p>
+  </footer>
+
+  <!-- Script principal -->
+  <script src="script.js" defer></script>
+</body>
+</html>
